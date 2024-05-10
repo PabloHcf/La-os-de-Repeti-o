@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class ReajusteSalarial {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Digite o salário atual do colaborador: R$ ");
+        double salarioAtual = scanner.nextDouble();
+
+        double salarioComReajuste = calcularReajusteSalario(salarioAtual);
+        double inflacaoPeriodo = 0.038; // Inflação do período de 3,8%
+        double salarioFinal = aplicarInflacao(salarioComReajuste, inflacaoPeriodo);
+
+        System.out.printf("O novo salário do colaborador após o reajuste e a inflação é de: R$ %.2f\n", salarioFinal);
+
+        scanner.close();
+    }
+
+    public static double calcularReajusteSalario(double salario) {
+        double aumento;
+        if (salario <= 280) {
+            aumento = salario * 0.20;
+        } else if (salario <= 700) {
+            aumento = salario * 0.15;
+        } else if (salario <= 1500) {
+            aumento = salario * 0.10;
+        } else {
+            aumento = salario * 0.05;
+        }
+        return salario + aumento;
+    }
+
+    public static double aplicarInflacao(double salario, double inflacao) {
+        return salario * (1 + inflacao);
+    }
+}
